@@ -1,0 +1,66 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ name }}</h1>
+        <app-hello></app-hello>
+        <app-hello></app-hello>
+        <app-hello></app-hello>
+        <hr>
+        <app-local></app-local>
+
+    </div>
+
+    <div id="app1">
+        <h1>{{ title }}</h1>
+        <h2>{{ name }}</h2>
+        <app-hello></app-hello>
+        <app-hello></app-hello>
+        <app-hello></app-hello>
+        <hr>
+    </div>
+
+    <script>
+        Vue.component('app-hello', {
+            template: '<h1>Hello From Vue Component</h1>'
+        })
+
+        var comp = {
+            template: '<h1> {{ class1 }}</h1>',
+            data() {
+                return {
+                    class1: 'Web Development Full Stack'
+                }
+            }
+        }
+
+
+        var v1 = new Vue({
+            el: '#app',
+            data: {
+                name: 'John Doe'
+            },
+            components: {
+                'app-local': comp
+            }
+        })
+
+        var v2 = new Vue({
+            el: '#app1',
+            data: {
+                title: 'James',
+                name: v1.name
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+.box {
+    width: 200px;
+    margin: 4px;
+    height: 200px;
+    background-color: gray;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.boxes {
+    display: flex;
+}
+
+span {
+    font-size: 70px;
+}

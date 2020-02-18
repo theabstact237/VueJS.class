@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VueJS</title>
+    <link rel="stylesheet" href="./images/style.css">
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-once>{{ name }}</h1>
+        <hi-comp></hi-comp>
+        <hello></hello>
+        <hello></hello>
+        <input type="text" v-model="name">
+        <br>
+        <br>
+
+        <br>
+        <br>
+        <img v-bind:src="imgSrc">
+        <br>
+        <div v-show="showTitle" v-html="title"></div>
+        <br>
+        <div v-on:click="divClick">
+            <button v-on:click.stop="changeName($event,'John Doe')">ChangeName</button>
+        </div>
+        <div v-for="person in people">
+            <h1 v-for="(value,key, index) in person">{{ key }} = {{ value }} = {{ index }}</h1>
+        </div>
+        <p>Counter One {{ result() }}</p>
+        <p>CounterTwo {{ counterTwo }}</p>
+        <button v-on:click="counterOne++">Increase Counter one</button>
+        <button v-on:click="counterTwo++">Increase Counter Two</button>
+    </div>
+    <div id="app2">
+        <hi-comp></hi-comp>
+        <hello></hello>
+        <hello></hello>
+        <hello></hello>
+    </div>
+    <script>
+        // You may of course also outsource this script code into a separate file (e.g. app.js) and simply import this file here
+        Vue.component('hello', {
+            template: '<h1>Hello World</h1>'
+        })
+
+        var comp = {
+            template: '<h1>Hi There</h1>',
+
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'hi-comp': comp
+            },
+            data: {
+                name: 'Donacien',
+                imgSrc: 'images/health6.jpeg',
+                title: '<h1>Vue App</h1>',
+                showTitle: false,
+                counterOne: 0,
+                counterTwo: 0,
+                people: [{
+                    id: 1,
+                    name: 'John Doe'
+                }, {
+                    id: 2,
+                    name: 'Fred'
+                }, {
+                    id: 3,
+                    name: 'James'
+                }],
+
+            },
+            methods: {
+                changeName(e, newName) {
+                    this.name = newName;
+                    this.showTitle = !this.showTitle;
+                },
+                divClick() {
+                    console.log('Div was clicked')
+                },
+                result() {
+                    console.log('Result Ran')
+                    return this.counterOne > 5 ? 'Greater than 5' : 'Lesser than 5'
+                },
+
+            }
+        });
+
+        new Vue({
+            el: '#app2',
+            components: {
+                'hi-comp': comp
+            }
+
+        })
+    </script>
+</body>
+
+</html>

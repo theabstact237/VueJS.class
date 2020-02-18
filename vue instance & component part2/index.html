@@ -1,0 +1,88 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <private></private>
+        <private></private>
+        <hello></hello>
+        <hello></hello>
+        <hello></hello>
+        <h1>{{ title }}</h1>
+        <h2>{{ counter }}</h2>
+        <h2>Scond Counter : {{ secondCounter }}</h2>
+        <h2>{{ result }}</h2>
+        <button v-on:click="secondCounter++">Increase Second Counter</button>
+        <button v-on:click="counter++">Increase Counter</button>
+        <button v-on:click="counter--">Decrease Counter</button>
+        <hr>
+        <img v-bind:src="imgSrc">
+    </div>
+    <script>
+        Vue.component('hello', {
+            data() {
+                return {
+                    title: 'Hello World'
+                }
+            },
+            template: '<div><h1>{{ title }}</h1></div>'
+        });
+
+        var comp = {
+            data() {
+                return {
+                    title: 'Privately Registered Component'
+                }
+            },
+            template: '<div><h1>{{ title }}</h1></div>'
+        }
+        new Vue({
+            el: '#app',
+            beforeCreate: function() {
+                console.log('Before Create Hook')
+            },
+            created: function() {
+                console.log('Hook Is Created')
+            },
+            beforeMount: function() {
+                console.log('Before Mounting')
+            },
+            mounted: function() {
+                console.log('Mounted')
+            },
+            beforeUpdate: function() {
+                console.log('Before Update')
+            },
+            data: {
+                title: 'Hello From Vue Js',
+                imgSrc: './images/camping.jpg',
+                counter: 0,
+                secondCounter: 0
+            },
+            computed: {
+                result: function() {
+                    console.log('Result Called')
+                    return this.counter > 5 ? 'Greater than 5' : 'Lesser than 5'
+                },
+            },
+            watch: {
+                counter: function(value) {
+                    console.log(value)
+                }
+            },
+            components: {
+                'private': comp
+            }
+        })
+    </script>
+</body>
+
+</html>
